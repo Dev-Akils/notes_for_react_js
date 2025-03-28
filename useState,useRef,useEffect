@@ -1,0 +1,35 @@
+import logo from './logo.svg';
+import './App.css';
+import {useEffect, useRef, useState} from 'react'
+
+function VedioPlayer({isPlaying,src}){
+  const ref=useRef(null);
+  useEffect(()=>{
+    if(isPlaying){
+      ref.current.play();
+    }else{
+      ref.current.pause();
+    }
+  },[isPlaying])
+
+  return <video style={{width:"50%", heigth:"50%",padding:"20px"}}  ref={ref} src={src} loop playsInline/>
+
+}
+
+
+
+//main function
+________________
+function App() {
+  const [isPlaying,setIsPlaying]=useState(false);
+return (
+  <div className="App" style={{justifyContent:"center",alignItems:"center", display:"flex",flexDirection:"column",padding:"20px"}}>
+  <button style={{color:"white", backgroundColor:"red", padding:"10px",borderRadius:"10px"}} onClick={()=>setIsPlaying(!isPlaying)}>{!isPlaying?'play':'pause'}</button>   
+  <VedioPlayer isPlaying={isPlaying} src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"/>
+    </div>
+  );
+}
+
+export default App;
+
+
